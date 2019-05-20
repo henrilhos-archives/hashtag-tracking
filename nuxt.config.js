@@ -56,15 +56,15 @@ module.exports = {
    ** Axios module configuration
    */
   axios: {
-    prefix: '/api',
-    proxy: true
+    prefix: '/api'
+    // proxy: true
     // See https://github.com/nuxt-community/axios-module#options
   },
-  proxy: {
-    '/api/':
-      process.env.API_URL_BROWSER ||
-      `http://localhost:${process.env.PORT || 3000}/api`
-  },
+  // proxy: {
+  //   '/api/':
+  //     process.env.API_URL_BROWSER ||
+  //     `http://localhost:${process.env.PORT || 3000}/api`
+  // },
 
   /*
    ** Build configuration
