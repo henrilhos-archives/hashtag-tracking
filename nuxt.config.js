@@ -37,7 +37,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify'],
+  plugins: ['@/plugins/vuetify', '@/plugins/axios'],
 
   /*
    ** Nuxt.js modules
@@ -51,7 +51,14 @@ module.exports = {
    ** Axios module configuration
    */
   axios: {
+    prefix: '/api',
+    proxy: true
     // See https://github.com/nuxt-community/axios-module#options
+  },
+  proxy: {
+    '/api/':
+      process.env.API_URL_BROWSER ||
+      `http://localhost:${process.env.PORT || 3000}/api`
   },
 
   /*
