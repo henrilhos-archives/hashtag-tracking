@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     getTweets() {
-      this.$axios.get('/tweets').then(res => {
+      this.$axios.get('/api/tweets').then(res => {
         this.tweets = res.data
         this.updateVisibleTweets()
       })

@@ -47,12 +47,12 @@ export default {
   },
   methods: {
     getHashtags() {
-      this.$axios.get('/hashtag').then(response => {
+      this.$axios.get('/api/hashtag').then(response => {
         this.hashtags = response.data.map(obj => obj.hashtag)
       })
     },
     createHashtag(item) {
-      this.$axios.post('/hashtag', { hashtag: item }).then(() => {
+      this.$axios.post('/api/hashtag', { hashtag: item }).then(() => {
         this.getHashtags()
         this.snackbar = true
         this.snackbarText = 'Hashtag cadastrada com sucesso'
@@ -62,7 +62,7 @@ export default {
       this.hashtags.splice(this.hashtags.indexOf(item), 1)
       this.hashtags = [...this.hashtags]
 
-      this.$axios.delete(`/hashtag/${item}`).then(() => {
+      this.$axios.delete(`/api/hashtag/${item}`).then(() => {
         this.snackbar = true
         this.snackbarText = 'Hashtag excluída com sucesso'
       })
