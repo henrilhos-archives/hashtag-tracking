@@ -20,6 +20,11 @@ module.exports = {
         rel: 'stylesheet',
         href:
           'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css'
       }
     ]
   },
@@ -37,7 +42,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify', '@/plugins/axios'],
+  plugins: ['@/plugins/vuetify', '@/plugins/axios', '@/plugins/moment'],
 
   /*
    ** Nuxt.js modules
