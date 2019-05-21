@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const moment = require('moment')
 
-function prepareEnv() {
+function initialize() {
   Vue.use(Vuetify)
   Vue.use(axios)
   Vue.use(require('vue-moment'), { moment })
@@ -12,5 +12,5 @@ function prepareEnv() {
 }
 
 module.exports = {
-  prepareEnv
+  initialize
 }
