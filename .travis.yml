@@ -1,11 +1,12 @@
 sudo: false
+language: node_js
 cache: yarn
 
 jobs:
   include:
     - stage: tests
-      before_script:
-        - yarn
+      # before_script:
+      #   - yarn
       script: yarn test
     - stage: deploy
       script: skip
