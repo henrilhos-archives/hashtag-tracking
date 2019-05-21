@@ -1,6 +1,6 @@
 <template>
   <VFlex xs12>
-    <VCombobox v-model="hashtags" chips hide-details clearable solo multiple>
+    <VCombobox v-model="hashtags" chips hide-details solo multiple>
       <template v-slot:selection="data">
         <VChip
           :selected="data.selected"
