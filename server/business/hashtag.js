@@ -1,7 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const models = require('../models')
-
-const Hashtag = models.getModel('Hashtag')
+const Hashtag = require('../models/hashtag')
 
 function getHashtags() {
   return Hashtag.aggregate([{ $match: { active: true } }])
