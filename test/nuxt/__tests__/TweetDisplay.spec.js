@@ -5,7 +5,7 @@ import TweetDisplay from './../../../nuxt/components/TweetDisplay'
 const testUtils = require('../test-utils')
 
 beforeAll(() => {
-  return testUtils.prepareEnv()
+  return testUtils.initialize()
 })
 
 test('should render TweetDisplay', () => {
