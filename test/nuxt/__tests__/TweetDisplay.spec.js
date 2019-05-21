@@ -8,25 +8,30 @@ beforeAll(() => {
   return testUtils.initialize()
 })
 
-test('should render TweetDisplay', () => {
-  const tweet = {
-    text: 'Rodando os testes unitários',
-    user: {
-      name: 'Castilhos',
-      screenName: 'castilh0s'
-    },
-    createdAt: new Date()
-  }
-
-  const { queryByTestId } = render(TweetDisplay, {
-    props: {
-      tweet: tweet
-    }
+describe('Test the TweetDisplay', () => {
+  beforeAll(() => {
+    return testUtils.initialize()
   })
 
-  expect(queryByTestId('userName')).toHaveTextContent('Castilhos')
-  expect(queryByTestId('userScreenName')).toHaveTextContent('@castilh0s')
-  expect(queryByTestId('tweet')).toHaveTextContent(
-    'Rodando os testes unitários'
-  )
+  test('It should render TweetDisplay', () => {
+    const tweet = {
+      text: 'Rodando os testes unitários',
+      user: {
+        name: 'Castilhos',
+        screenName: 'castilh0s'
+      },
+      createdAt: new Date()
+    }
+    const { queryByTestId } = render(TweetDisplay, {
+      props: {
+        tweet: tweet
+      }
+    })
+
+    expect(queryByTestId('userName')).toHaveTextContent('Castilhos')
+    expect(queryByTestId('userScreenName')).toHaveTextContent('@castilh0s')
+    expect(queryByTestId('tweet')).toHaveTextContent(
+      'Rodando os testes unitários'
+    )
+  })
 })
