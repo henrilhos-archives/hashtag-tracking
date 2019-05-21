@@ -57,6 +57,7 @@ module.exports = {
    */
   axios: {
     prefix: '/api',
+    credentials: false,
     proxy: true
     // See https://github.com/nuxt-community/axios-module#options
   },
