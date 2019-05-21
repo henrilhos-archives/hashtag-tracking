@@ -1,11 +1,15 @@
 <template>
   <VToolbar color="primary" dark>
-    <VToolbarTitle @click="$router.push('/')">Hashtag Tracking</VToolbarTitle>
+    <VToolbarTitle data-testid="title" @click="$router.push('/')"
+      >Hashtag Tracking</VToolbarTitle
+    >
 
     <VSpacer />
 
     <VToolbarItems class="hidden-sm-and-down">
-      <VBtn flat @click="$router.push('/about')">Sobre</VBtn>
+      <VBtn flat data-testid="about" @click="$router.push('/about')"
+        >Sobre</VBtn
+      >
     </VToolbarItems>
   </VToolbar>
 </template>
