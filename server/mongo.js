@@ -3,13 +3,15 @@ const mongoose = require('mongoose')
 const consola = require('consola')
 const config = require('./config')
 
+let mongoServer
+
 module.exports.connect = () =>
   new Promise(async (resolve, reject) => {
     let MONGODB_URI
     if (process.env.NODE_ENV !== 'test') {
       MONGODB_URI = config.MONGODB_URI
     } else {
-      const mongoServer = new MongoMemoryServer()
+      mongoServer = new MongoMemoryServer()
       MONGODB_URI = await mongoServer.getConnectionString()
     }
 
@@ -31,3 +33,11 @@ module.exports.connect = () =>
       reject(e)
     }
   })
+
+module.exports.disconnect = () => {
+  if (process.env.NODE_ENV === 'test') {
+    mongoServer.stop()
+  }
+
+  mongoose.disconnect()
+}

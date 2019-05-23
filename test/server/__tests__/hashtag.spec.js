@@ -6,6 +6,10 @@ beforeAll(async () => {
   server = await app.initialize()
 })
 
+afterAll(async () => {
+  await app.close()
+})
+
 describe('create a hashtag', () => {
   test('should make a new hashtag', done => {
     request(server)

@@ -25,6 +25,11 @@ async function initialize() {
   return app
 }
 
+async function close() {
+  await mongo.disconnect()
+}
+
 module.exports = {
-  initialize
+  initialize,
+  close
 }
