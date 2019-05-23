@@ -8,6 +8,8 @@ const app = require('./app')
 config.dev = !(process.env.NODE_ENV === 'production')
 
 async function start() {
+  const server = await app.initialize()
+
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
 
@@ -22,10 +24,10 @@ async function start() {
   }
 
   // Give nuxt middleware to express
-  app.use(nuxt.render)
+  server.use(nuxt.render)
 
   // Listen the server
-  app.listen(port, host)
+  server.listen(port, host)
   consola.ready({
     message: `Server listening on http://${host}:${port}`,
     badge: true
