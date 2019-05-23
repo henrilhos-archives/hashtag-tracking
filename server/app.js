@@ -11,11 +11,16 @@ async function initialize() {
   app.use(express.json())
   app.use(express.urlencoded({ extended: false }))
 
-  await mongo.connect().then(() => {
-    consola.info('Loading routes...')
-    app.use('/api', routes)
-    consola.success('Routes loaded!')
-  })
+  await mongo
+    .connect()
+    .then(() => {
+      consola.info('Loading routes...')
+      app.use('/api', routes)
+      consola.success('Routes loaded!')
+    })
+    .catch(error => {
+      throw new Error({ error: error })
+    })
 
   return app
 }
