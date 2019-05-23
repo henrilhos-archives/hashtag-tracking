@@ -4,10 +4,6 @@ import TweetDisplay from './../../../nuxt/components/TweetDisplay'
 
 const testUtils = require('../test-utils')
 
-beforeAll(() => {
-  return testUtils.initialize()
-})
-
 describe('Test the TweetDisplay', () => {
   beforeAll(() => {
     return testUtils.initialize()
