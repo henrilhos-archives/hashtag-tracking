@@ -1,10 +1,13 @@
-const mongoose = require('mongoose')
-const { Schema } = mongoose
-
-const HashtagSchema = new Schema({
-  hashtag: String,
-  active: Boolean,
-  count: Number
-})
-
-module.exports = mongoose.model('hashtag', HashtagSchema)
+module.exports = {
+  name: 'Hashtag',
+  definition: {
+    hashtag: String,
+    active: Boolean,
+    count: Number
+  },
+  options: {
+    strict: false,
+    collection: 'hashtag',
+    timestamps: true
+  }
+}
