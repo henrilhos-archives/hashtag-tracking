@@ -8,7 +8,7 @@ jobs:
     - stage: tests
       # before_script:
       #   - yarn
-      script: yarn test --detectOpenHandles
+      script: yarn test
     - stage: deploy
       script: skip
       deploy: &heroku
