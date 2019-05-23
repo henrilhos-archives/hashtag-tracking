@@ -1,10 +1,10 @@
 const { Router } = require('express')
-const TwitterBusiness = require('../business/twitter')
+const TwitterManagement = require('../management/twitter')
 
 const router = Router()
 
 let tweets = []
-TwitterBusiness.getTweetsInterval(callback => {
+TwitterManagement.getTweetsInterval(callback => {
   tweets = callback
 })
 
