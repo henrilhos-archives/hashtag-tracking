@@ -53,7 +53,7 @@ function getTweets(hashtags) {
       return tweets
     })
     .catch(error => {
-      consola.error(error)
+      consola.error('Error getting tweets:', error)
       return []
     })
 }
