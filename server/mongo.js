@@ -1,46 +1,32 @@
+const { MongoMemoryServer } = require('mongodb-memory-server')
 const mongoose = require('mongoose')
 const consola = require('consola')
-const { Schema } = mongoose
-
 const config = require('./config')
-const hashtag = require('./models/hashtag')
 
-const srcModels = [hashtag]
+module.exports.connect = () =>
+  new Promise(async (resolve, reject) => {
+    let MONGODB_URI
+    if (process.env.NODE_ENV !== 'test') {
+      MONGODB_URI = config.MONGODB_URI
+    } else {
+      const mongoServer = new MongoMemoryServer()
+      MONGODB_URI = await mongoServer.getConnectionString()
+    }
 
-const database = mongoose.createConnection(config.MONGODB_URI, {
-  autoReconnect: true,
-  reconnectTries: 0,
-  reconnectInterval: 100,
-  useNewUrlParser: true
-})
-
-const models = {}
-srcModels.forEach(srcModel => {
-  // const srcModel = m
-  srcModel.options.timestamps = true
-  const schema = new Schema(srcModel.definition, srcModel.options)
-
-  if (srcModel.indexes != null) {
-    srcModel.indexes.forEach(idx => {
-      schema.index(idx.fields, idx.options)
+    mongoose.connection.on('connected', () => {
+      consola.info('MongoDB connected!')
+      resolve()
     })
-  }
 
-  const model = database.model(srcModel.name, schema)
-
-  consola.info(`Mapping entitiy ${srcModel.name}...`)
-  models[srcModel.name] = model
-})
-
-const getConnection = () => {
-  return database
-}
-
-const getModel = ({ modelName }) => {
-  return models[modelName]
-}
-
-module.exports = {
-  getConnection,
-  getModel
-}
+    try {
+      mongoose
+        .connect(MONGODB_URI, {
+          autoReconnect: true,
+          reconnectTries: 0,
+          reconnectInterval: 100
+        })
+        .then(resolve, reject)
+    } catch (e) {
+      reject(e)
+    }
+  })

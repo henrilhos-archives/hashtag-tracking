@@ -1,5 +1,4 @@
-const { getModel } = require('../mongo')
-const Hashtag = getModel({ modelName: 'Hashtag' })
+const Hashtag = require('../models/hashtag')
 
 const createHashtag = async ({ hashtag }) => {
   try {
