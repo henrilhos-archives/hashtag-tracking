@@ -1,84 +1,52 @@
 /* eslint-disable no-underscore-dangle */
 const { Router } = require('express')
-const consola = require('consola')
 
-const hashtagBusiness = require('../business/hashtag')
+const {
+  createHashtag,
+  deleteHashtag,
+  getHashtag,
+  getHashtags,
+  updateHashtag
+} = require('../management/hashtag')
 
 const router = Router()
 
 /* GET hashtags */
-router.get('/', (req, res) => {
-  hashtagBusiness
-    .getHashtags()
-    .then(r => {
-      res.json(r)
-    })
-    .catch(e => {
-      consola.error('** Error getting hashtags:', e)
-      res.json(null)
-    })
+router.get('/', async (req, res) => {
+  const result = await getHashtags()
+  res.json(result)
 })
 
 /* POST hashtag */
-router.post('/', (req, res) => {
-  const hashtag = req.body.hashtag.toLowerCase()
+router.post('/', async (req, res) => {
+  const reqHashtag = req.body.hashtag.toLowerCase()
 
-  hashtagBusiness
-    .getHashtag(hashtag)
-    .then(r => {
-      if (r.length === 0) {
-        hashtagBusiness
-          .createHashtag(hashtag)
-          .then(response => {
-            res.json(response)
-          })
-          .catch(e => {
-            consola.error('** Error creating hashtag:', e)
-            res.json(null)
-          })
-      } else {
-        hashtagBusiness
-          .updateHashtag(r[0])
-          .then(response => {
-            res.json(response)
-          })
-          .catch(e => {
-            consola.error('** Error creating hashtag:', e)
-            res.json(null)
-          })
-      }
-    })
-    .catch(e => {
-      consola.error('** Error getting hashtag:', e)
-      res.json(null)
-    })
+  const hashtags = await getHashtag({ hashtag: reqHashtag })
+  if (hashtags.length === 0) {
+    const result = await createHashtag({ hashtag: reqHashtag })
+    res.json(result)
+  } else {
+    const id = hashtags[0]._id
+    const count = hashtags[0].count + 1
+
+    const result = await updateHashtag({ id: id, count: count })
+    res.json(result)
+  }
 })
 
 /* DELETE hashtag */
-router.delete('/:hashtag', (req, res) => {
-  const hashtag = req.params.hashtag.toLowerCase()
+router.delete('/:hashtag', async (req, res) => {
+  const reqHashtag = req.params.hashtag.toLowerCase()
 
-  hashtagBusiness
-    .getHashtag(hashtag)
-    .then(r => {
-      if (r.length !== 0) {
-        hashtagBusiness
-          .deleteHashtag(r[0])
-          .then(response => {
-            res.json(response)
-          })
-          .catch(e => {
-            consola.error('** Error deleting hashtag:', e)
-            res.json(null)
-          })
-      } else {
-        res.json({ message: "Hashtag doesn't exists" })
-      }
-    })
-    .catch(e => {
-      consola.error('** Error getting hashtag:', e)
-      res.json(null)
-    })
+  const hashtags = await getHashtag({ hashtag: reqHashtag })
+  if (hashtags.length > 0) {
+    const id = hashtags[0]._id
+
+    const result = await deleteHashtag({ id: id })
+    res.json(result)
+  } else {
+    res.json({ message: "Hashtag doesn't exists" })
+  }
 })
 
 module.exports = router
