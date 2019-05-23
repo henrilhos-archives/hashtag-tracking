@@ -1,8 +1,8 @@
 const Twitter = require('twitter')
 const consola = require('consola')
 
-const hashtagBusiness = require('./hashtag')
-const config = require('./../config')
+const config = require('../config')
+const { getHashtags } = require('./hashtag')
 
 const client = new Twitter({
   consumer_key: config.TWITTER_CONSUMER_KEY,
@@ -59,18 +59,17 @@ function getTweets(hashtags) {
 }
 
 function getTweetsInterval(callback) {
-  setInterval(() => {
-    hashtagBusiness.getHashtags().then(response => {
-      const hashtags = response.map(obj => obj.hashtag)
+  setInterval(async () => {
+    const response = await getHashtags()
+    const hashtags = response.map(obj => obj.hashtag)
 
-      if (hashtags.length > 0) {
-        getTweets(hashtags).then(tweets => {
-          callback(tweets)
-        })
-      }
+    if (hashtags.length > 0) {
+      getTweets(hashtags).then(tweets => {
+        callback(tweets)
+      })
+    }
 
-      return []
-    })
+    return []
   }, 5000)
 }
 
