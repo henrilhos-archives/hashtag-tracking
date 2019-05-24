@@ -34,4 +34,7 @@ $ yarn start
 
 # generate static project
 $ yarn run generate
+
+# run tests
+$ yarn test
 ```
