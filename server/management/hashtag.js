@@ -18,7 +18,7 @@ const deleteHashtag = async ({ id }) => {
   try {
     const query = { $set: { active: false } }
 
-    const response = await Hashtag.findByIdAndUpdate(id, query)
+    const response = await Hashtag.findByIdAndUpdate(id, query, { new: true })
     return response
   } catch (err) {
     return err
@@ -51,7 +51,7 @@ const updateHashtag = async ({ id, count }) => {
   try {
     const query = { $set: { active: true, count: count } }
 
-    const response = await Hashtag.findByIdAndUpdate(id, query)
+    const response = await Hashtag.findByIdAndUpdate(id, query, { new: true })
     return response
   } catch (err) {
     return err
