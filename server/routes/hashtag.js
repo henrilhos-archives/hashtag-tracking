@@ -17,7 +17,21 @@ router.get('/', async (req, res) => {
   res.json(result)
 })
 
-/* POST hashtag */
+/* GET :hashtag */
+router.get('/:hashtag', async (req, res) => {
+  const reqHashtag = req.params.hashtag.toLowerCase()
+  const hashtags = await getHashtag({ hashtag: reqHashtag })
+  const hashtag = hashtags.filter(h => h.hashtag === reqHashtag)[0]
+
+  if (hashtag) {
+    res.json(hashtag)
+  } else {
+    res.status(404)
+    res.send("Hashtag doesn't exists")
+  }
+})
+
+/* POST :hashtag */
 router.post('/', async (req, res) => {
   const reqHashtag = req.body.hashtag.toLowerCase()
 
@@ -34,18 +48,20 @@ router.post('/', async (req, res) => {
   }
 })
 
-/* DELETE hashtag */
+/* DELETE :hashtag */
 router.delete('/:hashtag', async (req, res) => {
   const reqHashtag = req.params.hashtag.toLowerCase()
-
   const hashtags = await getHashtag({ hashtag: reqHashtag })
-  if (hashtags.length > 0) {
-    const id = hashtags[0]._id
+  const hashtag = hashtags.filter(h => h.hashtag === reqHashtag)[0]
 
+  if (hashtag) {
+    const id = hashtag._id
     const result = await deleteHashtag({ id: id })
+
     res.json(result)
   } else {
-    res.json({ message: "Hashtag doesn't exists" })
+    res.status(404)
+    res.send("Hashtag doesn't exists")
   }
 })
 
