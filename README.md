@@ -1,4 +1,5 @@
-# Hashtag Tracking [![Build Status](https://travis-ci.com/castilh0s/Hashtag-Tracking.svg?branch=master)](https://travis-ci.com/castilh0s/Hashtag-Tracking)
+# Hashtag Tracking
+[![Build Status](https://travis-ci.com/castilh0s/Hashtag-Tracking.svg?branch=master)](https://travis-ci.com/castilh0s/Hashtag-Tracking)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcastilh0s%2FHashtag-Tracking.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcastilh0s%2FHashtag-Tracking?ref=badge_shield)
 
 > Projeto para busca e acompanhamento de hashtags desenvolvido para o teste da [Magrathea Labs](https://www.magrathealabs.com/).
