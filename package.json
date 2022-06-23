@@ -50,7 +50,7 @@
     "jest-dom": "^4.0.0",
     "jest-mongoose": "^1.0.2",
     "jest-serializer-vue": "^2.0.2",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.5.0",
     "jsdom-global": "^3.0.2",
     "mongodb-memory-server": "^5.1.5",
     "nodemon": "^1.19.1",
